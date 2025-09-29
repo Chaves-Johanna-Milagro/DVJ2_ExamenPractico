@@ -10,7 +10,7 @@ public class RotateCamera : MonoBehaviour
     
     private VoiceRecognizer _voiceRecognizer;
 
-    void Start()
+    void Awake()
     {
         _voiceRecognizer = GetComponent<VoiceRecognizer>();
 
@@ -28,8 +28,6 @@ public class RotateCamera : MonoBehaviour
             Debug.Log(_leftCommand);
 
         });
-
-        _voiceRecognizer.ActiveRecognizer();
     }
 
 

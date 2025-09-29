@@ -16,7 +16,8 @@ public class VoiceRecognizer : MonoBehaviour
 
     }
 
-    public void ActiveRecognizer()
+
+    private void Start()
     {
         _keywordRecognizer = new KeywordRecognizer(_keywords.Keys.ToArray());
 
