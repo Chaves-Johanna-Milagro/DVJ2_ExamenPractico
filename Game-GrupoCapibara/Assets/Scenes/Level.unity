@@ -256,8 +256,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1cdb1eff839de1449b3b90029c48be1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _carRightPrefab: {fileID: 8390216482920796518, guid: 33212061c0529aa4f991193f34c8aa94, type: 3}
-  _carLeftPrefab: {fileID: 6203460779739120724, guid: 154560adfad2ae348bcaf1609d7f4d7f, type: 3}
+  _carPrefabs:
+  - {fileID: 1220010753389348547, guid: fa5a7eb1c03d6ba4da648e39b3f0dccd, type: 3}
+  - {fileID: 6873862999140894732, guid: b4bbe3b60b9a93e43bcfdb09670b78ff, type: 3}
+  - {fileID: 1063203058504410888, guid: 8f68ff5d0268f164b999c138e00f3468, type: 3}
+  - {fileID: 2700726682996983417, guid: d066dda1ee1eb43498afb10da08eaac0, type: 3}
+  - {fileID: 231417512580727665, guid: c7cc5a555dc86644b84fa322352960e7, type: 3}
   _poolSize: 10
 --- !u!4 &119479157
 Transform:
@@ -807,7 +811,7 @@ Transform:
   m_GameObject: {fileID: 541843281}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.09, y: 0, z: 1.99}
+  m_LocalPosition: {x: 6.09, y: 0, z: 6.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

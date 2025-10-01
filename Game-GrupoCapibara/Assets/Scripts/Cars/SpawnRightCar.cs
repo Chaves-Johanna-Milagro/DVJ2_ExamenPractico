@@ -16,11 +16,9 @@ public class SpawnRightCar : MonoBehaviour
 
     private int _amount = 5;
 
-    private string _typeMove = "right";
-
     private void Start()
     {
-        // Busca el pooler en la escena (puede estar en un objeto vacío llamado "CarPoolManager")
+        // Busca el pooler en la escena
         _carPooler = Object.FindFirstObjectByType<CarPooler>();
 
         if (_carPooler == null)
@@ -31,19 +29,28 @@ public class SpawnRightCar : MonoBehaviour
 
         StartCoroutine(GenerateCar());
     }
-
+  
     private IEnumerator GenerateCar()
     {
         for (int i = 0; i < _amount; i++)
         {
-            _spawnPos = new Vector3(transform.position.x, 0, i * _distanceZ);
+            Vector3 pos = transform.position;
 
-            GameObject newCar = _carPooler.GetCar(_typeMove);
+            _spawnPos = new Vector3(pos.x, pos.y, pos.z + (i * _distanceZ));
+
+            GameObject newCar = _carPooler.GetCar();
 
             if (newCar != null)
             {
                 newCar.transform.position = _spawnPos;
                 newCar.transform.rotation = Quaternion.identity;
+
+                MoveRight movement = newCar.GetComponent<MoveRight>(); //le asignamos el movimineto al auto
+                if (movement == null)
+                {
+                    movement = newCar.AddComponent<MoveRight>();
+                }
+
             }
 
             yield return new WaitForSeconds(Random.Range(_minDelay, _maxDelay));
