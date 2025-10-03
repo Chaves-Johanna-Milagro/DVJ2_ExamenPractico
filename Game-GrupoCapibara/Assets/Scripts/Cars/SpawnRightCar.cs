@@ -7,7 +7,7 @@ public class SpawnRightCar : MonoBehaviour //spawn de autos que van hacia la der
 {
     private CarPooler _carPooler;
 
-    private float _minDelay = 3f;
+    private float _minDelay = 5f;
     private float _maxDelay = 8f;
 
     private float _timeLifeCar = 15f;
