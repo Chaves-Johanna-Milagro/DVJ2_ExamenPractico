@@ -4,7 +4,7 @@ using UnityEngine;
 public class CarPooler : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _carPrefabs;
-    [SerializeField] private int _poolSize = 10;
+    [SerializeField] private int _poolSize = 20;
 
     private Queue<GameObject> _carPool = new Queue<GameObject>();
 

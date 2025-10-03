@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour //manejara las colisiones
 {
@@ -6,5 +7,6 @@ public class Player : MonoBehaviour //manejara las colisiones
     {
 
         Debug.Log("Chocado");
+        SceneManager.LoadScene("GameOver");
     }
 }

@@ -6,7 +6,7 @@ public class RotateCamera : MonoBehaviour
     private string _rightCommand = "mirar derecha";
     private string _leftCommand = "mirar izquierda";
 
-    private Vector3 _targetDirection = Vector3.forward;
+    private Quaternion _targetDirection;
     private float _speed = 20f;   
     
     private VoiceRecognizer _voiceRecognizer;
@@ -17,21 +17,21 @@ public class RotateCamera : MonoBehaviour
 
         _voiceRecognizer.AddCommand(_frontCommand, () =>
         {
-            _targetDirection = Vector3.forward;
+            _targetDirection = Quaternion.Euler(0f, 0f, 0f);
 
             Debug.Log(_frontCommand);
 
         });
         _voiceRecognizer.AddCommand(_rightCommand, () =>
         {
-            _targetDirection = Vector3.right;
+            _targetDirection = Quaternion.Euler(0f, 45f, 0f);
 
             Debug.Log(_rightCommand);
 
         });
         _voiceRecognizer.AddCommand(_leftCommand, () =>
         {
-            _targetDirection = Vector3.left;
+            _targetDirection = Quaternion.Euler(0f, -45f, 0f);
 
             Debug.Log(_leftCommand);
 
@@ -41,16 +41,6 @@ public class RotateCamera : MonoBehaviour
 
     void Update()
     {
-        if (_targetDirection != Vector3.zero)
-        {
-            // rotacion interpolada
-            // Quaternion targetRotation = Quaternion.LookRotation(_targetDirection, Vector3.up);
-             //transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _speed * Time.deltaTime);
-            
-            // rotacion instantanea
-            Quaternion targetRotation = Quaternion.LookRotation(_targetDirection, Vector3.up);
-            transform.rotation = targetRotation;
-
-        }
+        transform.rotation = Quaternion.Slerp(transform.rotation, _targetDirection, Time.deltaTime * _speed);
     }
 }
