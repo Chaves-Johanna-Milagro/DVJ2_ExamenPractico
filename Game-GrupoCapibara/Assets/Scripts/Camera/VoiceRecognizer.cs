@@ -11,8 +11,11 @@ public class VoiceRecognizer : MonoBehaviour
 
     public void AddCommand(string command, System.Action action)
     {
-        //comandos
-        _keywords.Add(command, action);
+        if (!_keywords.ContainsKey(command))
+        {
+            //comandos
+            _keywords.Add(command, action);
+        }
 
     }
 

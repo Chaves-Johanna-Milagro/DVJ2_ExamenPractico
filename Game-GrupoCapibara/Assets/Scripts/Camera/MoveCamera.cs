@@ -6,7 +6,7 @@ public class MoveCamera : MonoBehaviour
     private string _stopCommand = "parar";
 
     private Vector3 _direction = Vector3.forward;
-    private float _speed = 8f;
+    private float _speed = 3f;
 
     private bool _isWalking = false;
 

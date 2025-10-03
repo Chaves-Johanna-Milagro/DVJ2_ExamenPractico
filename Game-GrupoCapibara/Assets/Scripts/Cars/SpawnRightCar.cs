@@ -1,26 +1,20 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class SpawnRightCar : MonoBehaviour
+public class SpawnRightCar : MonoBehaviour //spawn de autos que van hacia la derecha
 {
     private CarPooler _carPooler;
 
-    private Vector3 _spawnPos;
+    private float _minDelay = 3f;
+    private float _maxDelay = 8f;
 
-    private float _distanceZ = 3f;
-
-    private float _minDelay = 0.2f;
-    private float _maxDelay = 5f;
-
-    private int _amount = 5;
-
-    private string _typeMove = "right";
+    private float _timeLifeCar = 15f;
 
     private void Start()
     {
-        // Busca el pooler en la escena (puede estar en un objeto vac�o llamado "CarPoolManager")
+        // Busca el pooler en la escena
         _carPooler = Object.FindFirstObjectByType<CarPooler>();
 
         if (_carPooler == null)
@@ -34,21 +28,47 @@ public class SpawnRightCar : MonoBehaviour
 
     private IEnumerator GenerateCar()
     {
-        for (int i = 0; i < _amount; i++)
-        {
-            _spawnPos = new Vector3(transform.position.x, 0, i * _distanceZ);
+        yield return new WaitForSeconds(Random.Range(_minDelay, _maxDelay));
 
-            GameObject newCar = _carPooler.GetCar(_typeMove);
+        while (true)
+        {
+            Vector3 pos = transform.position;
+
+            GameObject newCar = _carPooler.GetCar();
 
             if (newCar != null)
             {
-                newCar.transform.position = _spawnPos;
+                newCar.transform.position = pos;
                 newCar.transform.rotation = Quaternion.identity;
+
+                // añade el movimiento
+                MoveRight movement = newCar.GetComponent<MoveRight>();
+                if (movement == null)
+                {
+                    movement = newCar.AddComponent<MoveRight>();
+                }
+
+                // devolver el auto al pool
+                StartCoroutine(ReturnCar(newCar));
             }
 
             yield return new WaitForSeconds(Random.Range(_minDelay, _maxDelay));
         }
     }
 
+    private IEnumerator ReturnCar(GameObject car)
+    {
+       yield return new WaitForSeconds(_timeLifeCar);
+
+       // Quitar movimiento
+       MoveRight movement = car.GetComponent<MoveRight>();
+      if (movement != null)
+       {
+          Destroy(movement);
+       }
+
+       // Devolver al pool
+       _carPooler.ReturnCar(car);
+    }
 
 }
