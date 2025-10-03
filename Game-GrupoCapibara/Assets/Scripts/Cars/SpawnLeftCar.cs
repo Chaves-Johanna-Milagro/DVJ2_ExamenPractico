@@ -5,8 +5,8 @@ public class SpawnLeftCar : MonoBehaviour //spawn de autos que van hacia la izqu
 {
     private CarPooler _carPooler;
 
-    private float _minDelay = 3f;
-    private float _maxDelay = 5f;
+    private float _minDelay = 5f;
+    private float _maxDelay = 8f;
 
     private float _timeLifeCar = 15f;
 
@@ -39,7 +39,7 @@ public class SpawnLeftCar : MonoBehaviour //spawn de autos que van hacia la izqu
                 newCar.transform.position = pos;
                 newCar.transform.rotation = Quaternion.identity;
 
-                // añade el movimiento
+                // aï¿½ade el movimiento
                 MoveLeft movement = newCar.GetComponent<MoveLeft>();
                 if (movement == null)
                 {
