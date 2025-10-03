@@ -10,7 +10,7 @@ public class SpawnRightCar : MonoBehaviour //spawn de autos que van hacia la der
     private float _minDelay = 3f;
     private float _maxDelay = 8f;
 
-    private float _timeLifeCar = 10f;
+    private float _timeLifeCar = 15f;
 
     private void Start()
     {

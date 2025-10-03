@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class RotateCamera : MonoBehaviour
 {
+    private string _frontCommand = "mirar frente";
     private string _rightCommand = "mirar derecha";
     private string _leftCommand = "mirar izquierda";
 
@@ -14,6 +15,13 @@ public class RotateCamera : MonoBehaviour
     {
         _voiceRecognizer = GetComponent<VoiceRecognizer>();
 
+        _voiceRecognizer.AddCommand(_frontCommand, () =>
+        {
+            _targetDirection = Vector3.forward;
+
+            Debug.Log(_frontCommand);
+
+        });
         _voiceRecognizer.AddCommand(_rightCommand, () =>
         {
             _targetDirection = Vector3.right;
