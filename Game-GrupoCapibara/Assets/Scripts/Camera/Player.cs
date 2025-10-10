@@ -11,7 +11,7 @@ public class Player : MonoBehaviour //manejara las colisiones
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.name == "Meta")
+        if(other.gameObject.name == "Trofeo")
         {
             Debug.Log("Victoria");
             //SceneManager.LoadScene("Victory");

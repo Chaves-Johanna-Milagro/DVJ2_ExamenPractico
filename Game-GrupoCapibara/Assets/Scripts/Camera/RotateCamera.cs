@@ -11,6 +11,7 @@ public class RotateCamera : MonoBehaviour
     
     private VoiceRecognizer _voiceRecognizer;
 
+    private Victory _victory;
     void Awake()
     {
         _voiceRecognizer = GetComponent<VoiceRecognizer>();
@@ -36,11 +37,17 @@ public class RotateCamera : MonoBehaviour
             Debug.Log(_leftCommand);
 
         });
+
+        _victory = Object.FindFirstObjectByType<Victory>();
+
     }
 
 
     void Update()
     {
+        if (_victory.PlayerWin()) return;
+
         transform.rotation = Quaternion.Slerp(transform.rotation, _targetDirection, Time.deltaTime * _speed);
     }
+
 }

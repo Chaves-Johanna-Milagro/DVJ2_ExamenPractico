@@ -42,4 +42,9 @@ public class Timer : MonoBehaviour
 
         return string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, milliSeconds);
     }
+
+    public float TimeTotal() 
+    {  
+        return _elapsed; 
+    }
 }

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -11,8 +11,9 @@ public class Victory : MonoBehaviour
     private Timer _timer;
 
     private TMP_Text _timeText;
+    private TMP_Text _titleText;
 
-    private bool _isWin = true;
+    private bool _isWin = false;
 
     private GameObject[] _childs;
     private int _count = 0;
@@ -27,6 +28,7 @@ public class Victory : MonoBehaviour
         _timer = Object.FindFirstObjectByType<Timer>();
 
         _timeText = transform.Find("TTime").GetComponent<TMP_Text>();
+        _titleText = transform.Find("TTitle").GetComponent<TMP_Text>();
 
         _menu = transform.Find("BMenu").GetComponent<Button>();
         _restart = transform.Find("BRestart").GetComponent<Button>();
@@ -45,10 +47,37 @@ public class Victory : MonoBehaviour
     }
     public void WinGame()
     {
+        _isWin = true;
         SetStateChilds(_isWin);
 
         _timeText.text = _timer.StopTimer();
+
+        _titleText.text = GetTitleByTime(_timer.TimeTotal());
     }
+
+    // Cambia el texto según el tiempo final
+    private string GetTitleByTime(float time)
+    {
+
+        if (time < 20f)
+        {
+            return "Rápido";
+        }
+        if (time < 40f)
+        {
+            return "Normal";
+        }
+        if (time < 60f)
+        {
+            return "Tortuga";
+        }
+        else
+        {
+            return "Caracol!";
+        }
+    }
+
+
     private void SetStateChilds(bool state)
     {
         for (int i = 0; i < _count; i++)
@@ -56,5 +85,10 @@ public class Victory : MonoBehaviour
             _childs[i] = transform.GetChild(i).gameObject;
             _childs[i].SetActive(state);
         }
+    }
+
+    public bool PlayerWin()
+    {
+        return _isWin;
     }
 }
