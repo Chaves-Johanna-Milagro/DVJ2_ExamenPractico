@@ -14,7 +14,8 @@ public class MoveCamera : MonoBehaviour
 
     private VoiceRecognizer _voiceRecognizer;
 
-    
+    private Victory _victory;
+
     void Awake()
     {
         _voiceRecognizer = GetComponent<VoiceRecognizer>();
@@ -41,12 +42,14 @@ public class MoveCamera : MonoBehaviour
             Debug.Log(_stopCommand);
         });
 
-        
+        _victory = Object.FindFirstObjectByType<Victory>();
 
     }
 
     void Update()
     {
+        if (_victory.PlayerWin()) return;
+
         if (_isWalking)
         {
             transform.position += _direction * _speed * Time.deltaTime;

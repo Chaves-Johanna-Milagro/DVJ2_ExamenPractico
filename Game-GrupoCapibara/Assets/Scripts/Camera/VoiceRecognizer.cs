@@ -19,7 +19,6 @@ public class VoiceRecognizer : MonoBehaviour
 
     }
 
-
     private void Start()
     {
         _keywordRecognizer = new KeywordRecognizer(_keywords.Keys.ToArray());
@@ -39,5 +38,20 @@ public class VoiceRecognizer : MonoBehaviour
             keywordAction.Invoke();
         }
     }
+    private void OnDestroy()
+    {
+        // Detiene el recognizer si existe
+        if (_keywordRecognizer != null)
+        {
+            if (_keywordRecognizer.IsRunning)
+                _keywordRecognizer.Stop();
 
+            _keywordRecognizer.OnPhraseRecognized -= KeywordRecognizer_OnPhraseRecognized;
+            _keywordRecognizer.Dispose();
+            _keywordRecognizer = null;
+        }
+
+        // Limpia los comandos al recargarse la escena
+        _keywords.Clear();
+    }
 }
